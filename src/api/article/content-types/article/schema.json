@@ -13,15 +13,14 @@
   "pluginOptions": {},
   "attributes": {
     "slug": {
-      "type": "uid",
-      "targetField": "title",
+      "type": "string",
       "required": true
     },
     "version": {
       "type": "integer",
       "min": 1,
-      "required": true,
-      "default": 1
+      "default": 1,
+      "configurable": false
     },
     "state": {
       "type": "enumeration",
@@ -32,7 +31,8 @@
         "Published"
       ],
       "required": true,
-      "default": "Draft"
+      "default": "Draft",
+      "private": true
     },
     "title": {
       "type": "string",
