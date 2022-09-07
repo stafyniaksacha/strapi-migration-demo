@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=my_user
+      - POSTGRESQL_PASSWORD=password123
+      - POSTGRESQL_POSTGRES_PASSWORD=Secret@dmin
+      - POSTGRESQL_DATABASE=my_database

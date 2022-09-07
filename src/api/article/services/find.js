@@ -23,18 +23,27 @@ module.exports = {
    * Find last publised articles version
    */
   async latest(options = {limit: 10, offset: 0}) {
-    const qb = strapi.db.queryBuilder('api::article.article')
+    const knex = strapi.db.connection
 
-    const articles = await qb
-      .select(qb.raw('max(version) as version, *'))
-      .where({
-        state: 'Published'
-      })
-      .groupBy('slug')
+    /**
+     * select * 
+     * from articles 
+     * where (version, slug) in (
+     *  select max(version) as version, slug
+     *    from articles 
+     *    group by slug, state
+     *    having state = 'Published'
+     *  )
+     * limit ?
+     * offset ?
+     * order by created_at desc
+     */
+    const articles = await knex('articles')
       .limit(options.limit)
       .offset(options.offset)
-      .orderBy('createdAt', 'desc')
-      .execute()
+      .orderBy('created_at', 'desc')
+      .where(knex.raw("(version, slug) in (select max(version) as version, slug from articles group by slug, state having state = 'Published')"))
+      .select()
 
     return articles
   }
