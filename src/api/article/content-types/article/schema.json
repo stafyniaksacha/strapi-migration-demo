@@ -11,6 +11,12 @@
     "draftAndPublish": false
   },
   "pluginOptions": {},
+  "indexes": [
+    {
+      "name": "articles_slug_version_index",
+      "columns": ["version", "slug"]
+    }
+  ],
   "attributes": {
     "slug": {
       "type": "string",
