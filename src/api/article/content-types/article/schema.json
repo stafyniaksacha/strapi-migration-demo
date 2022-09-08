@@ -37,7 +37,21 @@
       ],
       "required": true,
       "default": "Draft",
-      "private": true
+      "private": true,
+      "columnType": {
+        "type": "enum",
+        "args": [
+          [
+            "Draft",
+            "In_Review",
+            "Published"
+          ], 
+          {
+            "useNative": true, 
+            "enumName": "articles_publish_state"
+          }
+        ]
+      }
     },
     "title": {
       "type": "string",
